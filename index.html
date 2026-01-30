@@ -1,174 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ORCA FILMS | Produção Audiovisual</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #000000;
-            --text: #ffffff;
-            --text-dim: #888888;
-            --border: rgba(255, 255, 255, 0.12);
-            --serif: 'Cormorant Garamond', serif;
-            --sans: 'Inter', sans-serif;
-            --mobile-padding: 10px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body { background-color: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-
-        /* --- Header --- */
-        header {
-            position: fixed; top: 0; width: 100%; padding: 1.5rem 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-        }
-        .logo { font-size: 0.9rem; letter-spacing: 4px; font-weight: 600; text-decoration: none; color: var(--text); }
-        nav a { margin-left: 1.5rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text); text-decoration: none; }
-
-        /* --- Hero --- */
-        .hero { 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: row;
-            align-items: center; 
-            justify-content: space-between;
-            padding: 120px 8% 60px;
-            gap: 2vw;
-            border-bottom: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-text-container { flex: 1; text-align: left; z-index: 2; }
-        .hero h1 { 
-            font-size: clamp(2.5rem, 8vw, 7.5rem); 
-            font-weight: 200; 
-            line-height: 0.85; 
-            text-transform: uppercase; 
-            letter-spacing: -3px;
-            margin-bottom: 1rem;
-        }
-        .hero-description {
-            font-family: var(--serif); font-style: italic;
-            font-size: clamp(1.1rem, 2.5vw, 2.2rem);
-            color: var(--text-dim); padding-left: 10%; display: block;
-        }
-
-        .hero-stack {
-            position: relative; width: 300px; height: 400px;
-            cursor: pointer; z-index: 3; flex-shrink: 0; margin-right: 20px;
-        }
-
-        .stack-card {
-            position: absolute; width: 100%; height: 100%;
-            border: 1px solid var(--border); overflow: hidden;
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s;
-            background: #111; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-        .stack-card img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .card-1 { z-index: 3; transform: rotate(0deg); }
-        .card-2 { z-index: 2; transform: rotate(-6deg) translateY(12px); opacity: 0.8; }
-        .card-3 { z-index: 1; transform: rotate(6deg) translateY(22px); opacity: 0.6; }
-
-        .hero-stack:hover .card-1 { transform: translateY(-25px); }
-        .hero-stack:hover .card-2 { transform: translateX(-80px) translateY(15px) rotate(-12deg); opacity: 1; }
-        .hero-stack:hover .card-3 { transform: translateX(80px) translateY(15px) rotate(12deg); opacity: 1; }
-
-        /* --- Seções e Grids --- */
-        .section-header { padding: 8rem 5% 2rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
-        .section-header h2 { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.5rem); font-style: italic; font-weight: 300; }
-        .section-header span { color: var(--text-dim); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; }
-
-        .work-grid, .photo-grid { display: grid; }
-        .work-grid { grid-template-columns: repeat(2, 1fr); }
-        .photo-grid { grid-template-columns: repeat(3, 1fr); }
-
-        .work-item { 
-            position: relative; overflow: hidden; 
-            border-right: 1px solid var(--border); 
-            border-bottom: 1px solid var(--border); 
-            cursor: pointer; aspect-ratio: 16/9; 
-        }
-        .photo-item { aspect-ratio: 4/5; }
-        .work-item img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
-        .work-item:hover img { transform: scale(1.06); }
-        
-        .overlay {
-            position: absolute; inset: 0; background: rgba(0,0,0,0.85);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 0; transition: 0.5s; padding: 25px; text-align: center;
-        }
-        .work-item:hover .overlay { opacity: 1; }
-        .overlay h3 { font-family: var(--serif); font-size: 1.4rem; font-style: italic; font-weight: 300; }
-
-        /* --- Sócios --- */
-        .founders { 
-    padding: 10rem 5%; 
-    display: grid; 
-    grid-template-columns: repeat(2, 350px); /* Define colunas fixas para não ficarem largas demais */
-    gap: 4rem; 
-    justify-content: center; /* Centraliza o grid na página */
-}
-
-.founder-card { 
-    border-left: 1px solid var(--border); 
-    padding-left: 2rem; 
-    text-align: center; /* Centraliza o texto e a imagem */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.founder-img { 
-    width: 100%; 
-    max-width: 300px; /* Evita que a foto fique gigante em telas muito grandes */
-    aspect-ratio: 4/5; 
-    object-fit: cover; 
-    margin-bottom: 2rem; 
-}
-
-        /* --- Modal --- */
-        #mainModal { position: fixed; inset: 0; background: #000; z-index: 9999; display: none; flex-direction: column; overflow-y: auto; }
-        .modal-header { padding: 3rem 5% 2rem; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: #000; }
-        .close-btn { font-size: 3rem; cursor: pointer; font-weight: 100; line-height: 1; }
-        #mediaDisplay { padding: 4rem 5%; width: 100%; }
-
-        footer { padding: 5rem 5%; text-align: center; border-top: 1px solid var(--border); font-size: 0.6rem; letter-spacing: 5px; color: #444; text-transform: uppercase; }
-
-        /* --- Mobile Responsiveness --- */
-        @media (max-width: 900px) {
-            .hero { flex-direction: column; text-align: center; padding: 140px var(--mobile-padding) 60px; gap: 40px; justify-content: center; }
-            .hero-stack { margin-right: 0; width: 220px; height: 300px; order: 2; }
-            .hero-text-container { order: 1; width: 100%; }
-            .hero-description { padding-left: 0; }
-
-            .work-grid, .photo-grid { 
-                grid-template-columns: 1fr; 
-                padding: 0 var(--mobile-padding); 
-                gap: 15px; 
-            }
-            .work-item { border: 1px solid var(--border); border-radius: 2px; }
-            .founders { 
-        grid-template-columns: 1fr; /* Uma coluna só no mobile */
-        padding: 5rem var(--mobile-padding); 
-        gap: 3rem; 
-        justify-items: center; /* Centraliza o item no eixo horizontal */
-    }
-    
-    .founder-card {
-        border-left: none; /* Remove a borda lateral no mobile para centralizar melhor */
-        padding-left: 0;
-    }
-            nav { display: none; } 
-            .section-header { padding: 5rem var(--mobile-padding) 1.5rem; }
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap"
+        rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
 
     <header>
@@ -176,7 +18,7 @@
         <nav>
             <a href="#filmes">Filmes</a>
             <a href="#fotografias">Fotografias</a>
-            <a href="#sobre">Sobre</a>
+            <a href="#sobre">Crew</a>
         </nav>
     </header>
 
@@ -184,7 +26,7 @@
         <section class="hero">
             <div class="hero-text-container">
                 <h1>ORCA FILMS</h1>
-                <span class="hero-description">Art Direction & Filmmaking</span>
+                <span class="hero-description" id="typing-text"></span>
             </div>
 
             <div class="hero-stack">
@@ -194,30 +36,58 @@
             </div>
         </section>
 
+        <section class="manifesto">
+            
+            <p>
+                A Orca Films não é uma produtora de vídeos e fotos. Não prometemos conteúdos bonitos com qualidade
+                profissional e cinematográfica — <span class="highlight">isso é o mínimo.</span><br><br>
+                Somos um <strong>pivô de crescimento</strong> para empresas. Através das nossas produções, buscamos
+                construir posicionamentos fortes e um sucesso sustentável no mercado.
+            </p>
+
+        </section>
+
         <div class="section-header" id="filmes">
             <h2>Filmes</h2>
-            <span>Archive / 08</span>
+            <span>Archive / 06</span>
         </div>
         <section class="work-grid">
+            <div class="work-item"
+                onclick="openMedia('vimeo', '1160306177', 'Film ASCDV - Ice Company', 'Fashion Film')">
+                <img src="image/editorialice/8.jpg">
+                <div class="overlay">
+                    <h3>ASCDV Ice Company</h3>
+                </div>
+            </div>
             <div class="work-item" onclick="openMedia('vimeo', '1155020294', 'Verão 2026', 'Editorial de Moda.')">
                 <img src="image/verao2026/verao2026.jpg">
-                <div class="overlay"><h3>Verão 2026</h3></div>
+                <div class="overlay">
+                    <h3>Verão 2026</h3>
+                </div>
             </div>
             <div class="work-item" onclick="openMedia('vimeo', '1125255622', 'Viviane Machado', 'Estética e Imagem.')">
                 <img src="image/ThumbClinica.png">
-                <div class="overlay"><h3>Viviane Machado</h3></div>
+                <div class="overlay">
+                    <h3>Viviane Machado</h3>
+                </div>
             </div>
             <div class="work-item" onclick="openMedia('vimeo', '1106079191', 'Maria & Rafael', 'Wedding film.')">
                 <img src="image/mariaerafael.webp">
-                <div class="overlay"><h3>Maria & Rafael</h3></div>
+                <div class="overlay">
+                    <h3>Maria & Rafael</h3>
+                </div>
             </div>
             <div class="work-item" onclick="openMedia('vimeo', '1147851577', 'SC Trip', 'Travel.')">
                 <img src="image/capaTripSc.png">
-                <div class="overlay"><h3>Cinematic SC</h3></div>
+                <div class="overlay">
+                    <h3>Cinematic SC</h3>
+                </div>
             </div>
             <div class="work-item" onclick="openMedia('vimeo', '1147851744', 'Fio do Bigode', 'Cinematic B-ROLL')">
                 <img src="image/thumb.jpg">
-                <div class="overlay"><h3>Fio do Bigode</h3></div>
+                <div class="overlay">
+                    <h3>Fio do Bigode</h3>
+                </div>
             </div>
         </section>
 
@@ -226,45 +96,70 @@
             <span>Gallery</span>
         </div>
         <section class="photo-grid">
-            <div class="work-item photo-item" onclick="openMedia('gallery', ['image/Urbansp/img1.jpg', 'image/Urbansp/img2.jpg', 'image/Urbansp/img3.jpg', 'image/Urbansp/img4.jpg', 'image/Urbansp/img5.jpg', 'image/Urbansp/img6.jpg'], 'Urban SP', 'Série SP.')">
+            <div class="work-item photo-item"
+                onclick="openMedia('gallery', ['image/Urbansp/img1.jpg', 'image/Urbansp/img2.jpg', 'image/Urbansp/img3.jpg', 'image/Urbansp/img4.jpg', 'image/Urbansp/img5.jpg', 'image/Urbansp/img6.jpg'], 'Urban SP', 'Série SP.')">
                 <img src="image/Urbansp/img3.jpg">
-                <div class="overlay"><h3>Urban SP</h3></div>
+                <div class="overlay">
+                    <h3>Urban SP</h3>
+                </div>
             </div>
-            <div class="work-item photo-item" onclick="openMedia('gallery', ['image/ruralbeauty/img1.jpg', 'image/ruralbeauty/img2.jpg', 'image/ruralbeauty/img3.jpg', 'image/ruralbeauty/img4.jpg', 'image/ruralbeauty/img5.jpg', 'image/ruralbeauty/img6.jpg'], 'Rural Beauty', 'Série Rural.')">
+            <div class="work-item photo-item"
+                onclick="openMedia('gallery', ['image/ruralbeauty/img1.jpg', 'image/ruralbeauty/img2.jpg', 'image/ruralbeauty/img3.jpg', 'image/ruralbeauty/img4.jpg', 'image/ruralbeauty/img5.jpg', 'image/ruralbeauty/img6.jpg'], 'Rural Beauty', 'Série Rural.')">
                 <img src="image/ruralbeauty/img2.jpg">
-                <div class="overlay"><h3>Rural Beauty</h3></div>
+                <div class="overlay">
+                    <h3>Rural Beauty</h3>
+                </div>
             </div>
-            <div class="work-item photo-item" onclick="openMedia('gallery', ['image/verao2026/5.jpg', 'image/verao2026/img1.jpg', 'image/verao2026/img6.jpg', 'image/verao2026/img3.jpeg', 'image/verao2026/img7.jpg', 'image/verao2026/img2.jpeg', 'image/verao2026/img8.jpg'], 'Summer', 'Editorial Summer.')">
+            <div class="work-item photo-item"
+                onclick="openMedia('gallery', ['image/verao2026/5.jpg', 'image/verao2026/img1.jpg', 'image/verao2026/img6.jpg', 'image/verao2026/img3.jpeg', 'image/verao2026/img7.jpg', 'image/verao2026/img2.jpeg', 'image/verao2026/img8.jpg'], 'Summer', 'Editorial Summer.')">
                 <img src="image/verao2026/verao2026.jpg">
-                <div class="overlay"><h3>Summer '26</h3></div>
+                <div class="overlay">
+                    <h3>Summer '26</h3>
+                </div>
             </div>
-            <div class="work-item photo-item" onclick="openMedia('gallery', ['image/DespertarDoDragao/img1.jpg', 'image/DespertarDoDragao/img2.jpg', 'image/DespertarDoDragao/img3.jpg', 'image/DespertarDoDragao/img4.jpg', 'image/DespertarDoDragao/img5.jpg', 'image/DespertarDoDragao/img6.jpg', 'image/DespertarDoDragao/img7.jpg', 'image/DespertarDoDragao/img8.jpg', 'image/DespertarDoDragao/img9.jpg', 'image/DespertarDoDragao/img10.jpg' ], 'Fashion', 'Editorial O Despertar do Dragão')">
+            <div class="work-item photo-item"
+                onclick="openMedia('gallery', ['image/DespertarDoDragao/img1.jpg', 'image/DespertarDoDragao/img2.jpg', 'image/DespertarDoDragao/img3.jpg', 'image/DespertarDoDragao/img4.jpg', 'image/DespertarDoDragao/img5.jpg', 'image/DespertarDoDragao/img6.jpg', 'image/DespertarDoDragao/img7.jpg', 'image/DespertarDoDragao/img8.jpg', 'image/DespertarDoDragao/img9.jpg', 'image/DespertarDoDragao/img10.jpg' ], 'Fashion', 'Editorial O Despertar do Dragão')">
                 <img src="image/DespertarDoDragao/img3.jpg">
-                <div class="overlay"><h3>O Despertar do Dragão</h3></div>
+                <div class="overlay">
+                    <h3>O Despertar do Dragão</h3>
+                </div>
             </div>
-            <div class="work-item photo-item" onclick="openMedia('gallery', ['image/EnsaioEsteticaEditado/1.jpg', 'image/EnsaioEsteticaEditado/2.jpg', 'image/EnsaioEsteticaEditado/3.jpg', 'image/EnsaioEsteticaEditado/4.jpg', 'image/EnsaioEsteticaEditado/5.jpg', 'image/EnsaioEsteticaEditado/6.jpg', 'image/EnsaioEsteticaEditado/7.jpg', 'image/EnsaioEsteticaEditado/8.jpg', 'image/EnsaioEsteticaEditado/9.jpg', 'image/EnsaioEsteticaEditado/10.jpg', 'image/EnsaioEsteticaEditado/11.jpg', 'image/EnsaioEsteticaEditado/12.jpg', 'image/EnsaioEsteticaEditado/13.jpg', 'image/EnsaioEsteticaEditado/14.jpg'], 'Beauty', 'Estética Viviane Machado')">
+            <div class="work-item photo-item"
+                onclick="openMedia('gallery', ['image/EnsaioEsteticaEditado/1.jpg', 'image/EnsaioEsteticaEditado/2.jpg', 'image/EnsaioEsteticaEditado/3.jpg', 'image/EnsaioEsteticaEditado/4.jpg', 'image/EnsaioEsteticaEditado/5.jpg', 'image/EnsaioEsteticaEditado/6.jpg', 'image/EnsaioEsteticaEditado/7.jpg', 'image/EnsaioEsteticaEditado/8.jpg', 'image/EnsaioEsteticaEditado/9.jpg', 'image/EnsaioEsteticaEditado/10.jpg', 'image/EnsaioEsteticaEditado/11.jpg', 'image/EnsaioEsteticaEditado/12.jpg', 'image/EnsaioEsteticaEditado/13.jpg', 'image/EnsaioEsteticaEditado/14.jpg'], 'Beauty', 'Estética Viviane Machado')">
                 <img src="image/EnsaioEsteticaEditado/3.jpg">
-                <div class="overlay"><h3>Editorial Viviane Machado</h3></div>
+                <div class="overlay">
+                    <h3>Editorial Viviane Machado</h3>
+                </div>
             </div>
-            <div class="work-item photo-item" onclick="openMedia('gallery', ['image/editorialice/1.jpg', 'image/editorialice/2.jpg', 'image/editorialice/3.jpg', 'image/editorialice/4.jpg', 'image/editorialice/5.jpg', 'image/editorialice/6.jpg', 'image/editorialice/7.jpg', 'image/editorialice/8.jpg'], 'Fashion', 'ASCDV - Ice Company')">
+            <div class="work-item photo-item"
+                onclick="openMedia('gallery', ['image/editorialice/1.jpg', 'image/editorialice/2.jpg', 'image/editorialice/3.jpg', 'image/editorialice/4.jpg', 'image/editorialice/5.jpg', 'image/editorialice/6.jpg', 'image/editorialice/7.jpg', 'image/editorialice/8.jpg'], 'Fashion', 'ASCDV - Ice Company')">
                 <img src="image/editorialice/2.jpg">
-                <div class="overlay"><h3>Editorial Ice Company</h3></div>
+                <div class="overlay">
+                    <h3>Editorial Ice Company</h3>
+                </div>
             </div>
-
         </section>
 
         <section class="founders" id="sobre">
-                        <div class="founder-card">
+            <div class="founder-card">
                 <img src="image/murillo.jpg" class="founder-img">
                 <h4>Murillo Macedo</h4>
-                <p style="color:var(--text-dim); font-size:0.8rem; margin-top:0.5rem;">CEO & Creative Director</p>
+                <p
+                    style="color:var(--text-dim); font-size:0.8rem; margin-top:0.5rem; text-transform: uppercase; letter-spacing: 2px;">
+                    CEO & Creative Director</p>
             </div>
             <div class="founder-card">
                 <img src="image/pietro.jpg" class="founder-img">
                 <h4>Pietro Oliveira</h4>
-                <p style="color:var(--text-dim); font-size:0.8rem; margin-top:0.5rem;">Director of Photography</p>
+                <p
+                    style="color:var(--text-dim); font-size:0.8rem; margin-top:0.5rem; text-transform: uppercase; letter-spacing: 2px;">
+                    Director of Photography</p>
             </div>
+        </section>
 
+        <section class="contact-cta">
+            <h2>Vamos elevar o seu posicionamento?</h2>
+            <a href="https://wa.me/55SEUNUMERO" target="_blank" class="whatsapp-btn">Iniciar um Projeto</a>
         </section>
     </main>
 
@@ -281,34 +176,7 @@
 
     <footer>© 2026 ORCA FILMS — Crafted with Precision</footer>
 
-    <script>
-        function openMedia(type, content, title, desc) {
-            const modal = document.getElementById('mainModal');
-            const display = document.getElementById('mediaDisplay');
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = desc || "";
-
-            let html = "";
-            if (type === 'vimeo') {
-                html = `<div style="position:relative;padding-bottom:56.25%;height:0;"><iframe src="https://player.vimeo.com/video/${content}?autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
-            } else if (type === 'gallery') {
-                // AQUI FOI ALTERADO PARA 2 COLUNAS
-                html = '<div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:15px;">' + 
-                       content.map(img => `<img src="${img}" style="width:100%; aspect-ratio:4/5; object-fit:cover; border:1px solid rgba(255,255,255,0.1)">`).join('') + 
-                       '</div>';
-            }
-
-            display.innerHTML = html;
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMedia() {
-            document.getElementById('mainModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            document.getElementById('mediaDisplay').innerHTML = '';
-        }
-        window.onkeydown = function(e) { if (e.key === "Escape") closeMedia(); }
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
